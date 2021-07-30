@@ -12,7 +12,7 @@ class NewsRepository {
   NewsRepository(this.read);
   final Reader read;
 
-  Future<List<Article>> getLatestArticles(String query) async {
+  Future<List<Article>> getLatestArticles() async {
     try {
       final response = await read(dioProvider).get(
         Constants.BASE_URL,
@@ -34,7 +34,7 @@ class GetResultRequestsNotifier extends ResultStateNotifier<List<Article>> {
 
   GetResultRequestsNotifier(this._newsRepository);
 
-  getLatest(String query) {
-    makeRequest(() => _newsRepository.getLatestArticles(query));
+  getLatest() {
+    makeRequest(() => _newsRepository.getLatestArticles());
   }
 }
