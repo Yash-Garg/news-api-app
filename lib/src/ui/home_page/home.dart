@@ -6,6 +6,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../data/models/article.dart';
 import '../../data/repository/news_repository.dart';
 import '../../data/state/result_state_notifier.dart';
+import '../../theme/app_theme.dart';
 import 'widgets/articles_list_view.dart';
 import 'widgets/error_text.dart';
 import 'widgets/loading.dart';
@@ -48,7 +49,12 @@ class _HomePageState extends State<HomePage> {
           useProvider(articlesProvider).when(
             loading: () => CustomLoading(),
             success: (articles) => Expanded(
-              child: ArticlesListView(articles: articles!),
+              child: RefreshIndicator(
+                color: accentColor,
+                onRefresh: () =>
+                    context.refresh(articlesProvider.notifier).getLatest(),
+                child: ArticlesListView(articles: articles!),
+              ),
             ),
             error: (e, s) => Expanded(child: ErrorText()),
           ),

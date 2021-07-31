@@ -20,7 +20,7 @@ class ArticlesListView extends StatelessWidget {
           var currentArticle = articles[index];
 
           return Padding(
-            padding: EdgeInsets.symmetric(horizontal: 5, vertical: 2),
+            padding: EdgeInsets.symmetric(horizontal: 5, vertical: 3),
             child: Card(
               elevation: 3,
               clipBehavior: Clip.antiAlias,
@@ -37,14 +37,26 @@ class ArticlesListView extends StatelessWidget {
                 },
                 child: Column(
                   children: [
-                    currentArticle.urlToImage != null
-                        ? Image.network(currentArticle.urlToImage!)
-                        : Image.asset('assets/placeholder.jpg'),
+                    SizedBox(
+                      height: 200,
+                      width: MediaQuery.of(context).size.width,
+                      child: currentArticle.urlToImage != null
+                          ? Image.network(
+                              currentArticle.urlToImage!,
+                              fit: BoxFit.cover,
+                            )
+                          : Image.asset(
+                              'assets/placeholder.jpg',
+                              fit: BoxFit.cover,
+                            ),
+                    ),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 10),
                       child: ListTile(
                         title: Text(
                           currentArticle.title,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
