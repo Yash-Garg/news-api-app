@@ -35,11 +35,8 @@ class _HomePageState extends State<HomePage> {
     return SafeArea(
       child: Scaffold(
         body: NestedScrollView(
-          floatHeaderSlivers: true,
           headerSliverBuilder: (context, innerBoxIsScrolled) => [
             SliverAppBar(
-              floating: true,
-              snap: true,
               title: Text(
                 'News API',
                 style: TextStyle(
