@@ -32,33 +32,43 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'News API',
-          style: TextStyle(
-            fontSize: 25,
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-            letterSpacing: 1,
-          ),
-        ),
-      ),
-      body: Column(
-        children: [
-          useProvider(articlesProvider).when(
-            loading: () => CustomLoading(),
-            success: (articles) => Expanded(
-              child: RefreshIndicator(
-                color: accentColor,
-                onRefresh: () =>
-                    context.refresh(articlesProvider.notifier).getLatest(),
-                child: ArticlesListView(articles: articles!),
+    return SafeArea(
+      child: Scaffold(
+        body: NestedScrollView(
+          floatHeaderSlivers: true,
+          headerSliverBuilder: (context, innerBoxIsScrolled) => [
+            SliverAppBar(
+              floating: true,
+              snap: true,
+              title: Text(
+                'News API',
+                style: TextStyle(
+                  fontSize: 25,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 1,
+                ),
               ),
             ),
-            error: (e, s) => Expanded(child: ErrorText()),
+          ],
+          body: Column(
+            children: [
+              useProvider(articlesProvider).when(
+                loading: () => CustomLoading(),
+                success: (articles) => Expanded(
+                  child: RefreshIndicator(
+                    color: accentColor,
+                    onRefresh: () => Future.value(
+                      context.refresh(articlesProvider.notifier).getLatest(),
+                    ),
+                    child: ArticlesListView(articles: articles!),
+                  ),
+                ),
+                error: (e, s) => Expanded(child: ErrorText()),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

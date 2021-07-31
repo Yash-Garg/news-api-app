@@ -14,6 +14,7 @@ class ArticlesListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scrollbar(
       child: ListView.builder(
+        padding: EdgeInsets.zero,
         shrinkWrap: true,
         itemCount: articles.length,
         itemBuilder: (context, index) {
