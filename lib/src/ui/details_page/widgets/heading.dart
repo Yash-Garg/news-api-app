@@ -12,7 +12,7 @@ class Heading extends StatelessWidget {
     return Text(
       text,
       style: TextStyle(
-        fontSize: 20,
+        fontSize: 19,
         fontWeight: FontWeight.bold,
         color: Colors.white70,
         letterSpacing: 1,

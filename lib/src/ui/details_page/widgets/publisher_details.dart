@@ -16,9 +16,12 @@ class PublisherDetails extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 10),
       child: ListTile(
-        title: Text(article.title),
+        title: Text(
+          article.title,
+          style: TextStyle(fontSize: 18),
+        ),
         subtitle: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 5),
+          padding: const EdgeInsets.symmetric(vertical: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
