@@ -11,7 +11,7 @@ final ThemeData appTheme = ThemeData(
   scaffoldBackgroundColor: Color(0xFF141414),
   fontFamily: GoogleFonts.rubik().fontFamily,
   pageTransitionsTheme: PageTransitionsTheme(builders: {
-    TargetPlatform.android: ZoomPageTransitionsBuilder(),
+    TargetPlatform.android: OpenUpwardsPageTransitionsBuilder(),
   }),
   appBarTheme: AppBarTheme(
     centerTitle: true,
