@@ -10,7 +10,12 @@ import 'widgets/publisher_details.dart';
 
 class DetailsPage extends StatefulWidget {
   final Article article;
-  const DetailsPage({Key? key, required this.article}) : super(key: key);
+  final int index;
+  const DetailsPage({
+    Key? key,
+    required this.article,
+    required this.index,
+  }) : super(key: key);
 
   @override
   _DetailsPageState createState() => _DetailsPageState();
@@ -36,18 +41,21 @@ class _DetailsPageState extends State<DetailsPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CachedNetworkImage(
-              placeholder: (ctx, url) => ShimmerLoading(),
-              imageUrl: article.urlToImage ?? Constants.PLACEHOLDER,
-              errorWidget: (ctx, url, err) => SizedBox(
-                height: 200,
-                width: MediaQuery.of(context).size.width,
-                child: Image.asset(
-                  'assets/placeholder.jpg',
-                  fit: BoxFit.cover,
+            Hero(
+              tag: 'news-banner-${widget.index}',
+              child: CachedNetworkImage(
+                placeholder: (ctx, url) => ShimmerLoading(),
+                imageUrl: article.urlToImage ?? Constants.PLACEHOLDER,
+                errorWidget: (ctx, url, err) => SizedBox(
+                  height: 200,
+                  width: MediaQuery.of(context).size.width,
+                  child: Image.asset(
+                    'assets/placeholder.jpg',
+                    fit: BoxFit.cover,
+                  ),
                 ),
+                fit: BoxFit.cover,
               ),
-              fit: BoxFit.cover,
             ),
             PublisherDetails(article: article),
             DescriptionCard(

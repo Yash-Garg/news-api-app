@@ -35,6 +35,7 @@ class ArticlesListView extends StatelessWidget {
                     MaterialPageRoute(
                       builder: (context) => DetailsPage(
                         article: currentArticle,
+                        index: index,
                       ),
                     ),
                   );
@@ -44,19 +45,22 @@ class ArticlesListView extends StatelessWidget {
                     SizedBox(
                       height: 200,
                       width: MediaQuery.of(context).size.width,
-                      child: CachedNetworkImage(
-                        placeholder: (ctx, url) => ShimmerLoading(),
-                        imageUrl:
-                            currentArticle.urlToImage ?? Constants.PLACEHOLDER,
-                        errorWidget: (ctx, url, err) => SizedBox(
-                          height: 200,
-                          width: MediaQuery.of(context).size.width,
-                          child: Image.asset(
-                            'assets/placeholder.jpg',
-                            fit: BoxFit.cover,
+                      child: Hero(
+                        tag: 'news-banner-$index',
+                        child: CachedNetworkImage(
+                          placeholder: (ctx, url) => ShimmerLoading(),
+                          imageUrl: currentArticle.urlToImage ??
+                              Constants.PLACEHOLDER,
+                          errorWidget: (ctx, url, err) => SizedBox(
+                            height: 200,
+                            width: MediaQuery.of(context).size.width,
+                            child: Image.asset(
+                              'assets/placeholder.jpg',
+                              fit: BoxFit.cover,
+                            ),
                           ),
+                          fit: BoxFit.cover,
                         ),
-                        fit: BoxFit.cover,
                       ),
                     ),
                     Padding(
