@@ -48,6 +48,9 @@ class ArticlesListView extends StatelessWidget {
                         placeholder: (ctx, url) => ShimmerLoading(),
                         imageUrl:
                             currentArticle.urlToImage ?? Constants.PLACEHOLDER,
+                        errorWidget: (ctx, url, err) => Center(
+                          child: Icon(Icons.error, size: 25),
+                        ),
                         fit: BoxFit.cover,
                       ),
                     ),

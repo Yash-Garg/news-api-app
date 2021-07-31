@@ -44,6 +44,9 @@ class _DetailsPageState extends State<DetailsPage> {
             CachedNetworkImage(
               placeholder: (ctx, url) => ShimmerLoading(),
               imageUrl: article.urlToImage ?? Constants.PLACEHOLDER,
+              errorWidget: (ctx, url, err) => Center(
+                child: Icon(Icons.error, size: 25),
+              ),
               fit: BoxFit.cover,
             ),
             PublisherDetails(article: article),
