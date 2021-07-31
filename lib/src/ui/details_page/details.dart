@@ -20,11 +20,6 @@ class _DetailsPageState extends State<DetailsPage> {
   @override
   Widget build(BuildContext context) {
     var article = widget.article;
-    var description = article.description;
-    var content = article.content;
-
-    description ??= 'No description found.';
-    content ??= 'No content found.';
 
     return Scaffold(
       appBar: AppBar(
@@ -50,7 +45,10 @@ class _DetailsPageState extends State<DetailsPage> {
               fit: BoxFit.cover,
             ),
             PublisherDetails(article: article),
-            DescriptionCard(description: description, content: content)
+            DescriptionCard(
+              description: article.description ?? 'No description found.',
+              content: article.content ?? 'No content found.',
+            ),
           ],
         ),
       ),

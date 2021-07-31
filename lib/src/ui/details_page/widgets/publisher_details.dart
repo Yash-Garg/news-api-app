@@ -13,11 +13,6 @@ class PublisherDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var author = article.author;
-    article.author != null
-        ? author = 'Submitted by ${article.author}'
-        : author = 'Author unknown';
-
     return Padding(
       padding: const EdgeInsets.only(top: 10),
       child: ListTile(
@@ -27,7 +22,7 @@ class PublisherDetails extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(author),
+              Text('Submitted by ${article.author ?? "Unknown"}'),
               SizedBox(height: 5),
               Text(
                 'Published at ${DateFormat('dd/MM/yyyy | hh:mm a').format(article.publishedAt)}',
