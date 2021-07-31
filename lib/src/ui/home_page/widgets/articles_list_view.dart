@@ -1,7 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:news_app/src/ui/details_page/details.dart';
 
+import '../../../../constants.dart';
 import '../../../data/models/article.dart';
+import '../../details_page/details.dart';
+import '../../shimmer.dart';
 
 class ArticlesListView extends StatelessWidget {
   final List<Article> articles;
@@ -41,15 +44,12 @@ class ArticlesListView extends StatelessWidget {
                     SizedBox(
                       height: 200,
                       width: MediaQuery.of(context).size.width,
-                      child: currentArticle.urlToImage != null
-                          ? Image.network(
-                              currentArticle.urlToImage!,
-                              fit: BoxFit.cover,
-                            )
-                          : Image.asset(
-                              'assets/placeholder.jpg',
-                              fit: BoxFit.cover,
-                            ),
+                      child: CachedNetworkImage(
+                        placeholder: (ctx, url) => ShimmerLoading(),
+                        imageUrl:
+                            currentArticle.urlToImage ?? Constants.PLACEHOLDER,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 10),

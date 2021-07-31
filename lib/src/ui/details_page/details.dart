@@ -1,7 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../constants.dart';
 import '../../data/models/article.dart';
+import '../shimmer.dart';
 import 'widgets/description_card.dart';
 import 'widgets/publisher_details.dart';
 
@@ -38,9 +41,11 @@ class _DetailsPageState extends State<DetailsPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            widget.article.urlToImage != null
-                ? Image.network(article.urlToImage!)
-                : Image.asset('assets/placeholder.jpg'),
+            CachedNetworkImage(
+              placeholder: (ctx, url) => ShimmerLoading(),
+              imageUrl: article.urlToImage ?? Constants.PLACEHOLDER,
+              fit: BoxFit.cover,
+            ),
             PublisherDetails(article: article),
             DescriptionCard(description: description, content: content)
           ],
